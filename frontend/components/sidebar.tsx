@@ -16,6 +16,7 @@ import {
   LogOut,
   Menu,
   X,
+  Moon,
 } from "lucide-react"
 
 export default function Sidebar() {
@@ -23,11 +24,16 @@ export default function Sidebar() {
   const router = useRouter()
   const [isCollapsed, setIsCollapsed] = useState(false)
   const [isMobileOpen, setIsMobileOpen] = useState(false)
+  const [isDarkMode, setIsDarkMode] = useState(false)
 
   const handleLogout = () => {
     localStorage.removeItem("token")
     localStorage.removeItem("user")
     router.push("/")
+  }
+
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode)
   }
 
   const menuItems = [
@@ -64,6 +70,29 @@ export default function Sidebar() {
         } transition-transform duration-300 ease-in-out md:hidden`}
       >
         <div className="relative flex flex-col h-full w-64 bg-gradient-to-b from-amber-700 to-indigo-800 text-white shadow-xl overflow-y-auto">
+          {/* User Profile Header - Mobile */}
+          <div className="p-4 flex items-center justify-between bg-amber-600 text-white border-b border-amber-800">
+            <div className="flex items-center">
+              <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center overflow-hidden">
+                <svg className="h-8 w-8 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                </svg>
+              </div>
+              <span className="ml-3 font-medium">sham sarkar</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <div className="w-8 h-8 rounded-full bg-white text-green-600 flex items-center justify-center font-bold">
+                P
+              </div>
+              <button 
+                onClick={toggleDarkMode}
+                className="w-8 h-8 rounded-full bg-white flex items-center justify-center"
+              >
+                <Moon className={`h-5 w-5 ${isDarkMode ? 'text-indigo-800' : 'text-gray-400'}`} />
+              </button>
+            </div>
+          </div>
+          
           <div className="p-4 border-b border-gray-700">
             <h2 className="text-xl font-bold">VIBE CONNECT</h2>
           </div>
@@ -100,6 +129,39 @@ export default function Sidebar() {
           isCollapsed ? "w-20" : "w-64"
         } bg-gradient-to-b from-amber-700 to-indigo-800 text-white transition-all duration-300`}
       >
+        {/* User Profile Header - Desktop */}
+        <div className={`${isCollapsed ? 'p-2' : 'p-4'} flex items-center justify-between bg-amber-600 text-white border-b border-amber-800`}>
+          {!isCollapsed ? (
+            <>
+              <div className="flex items-center">
+                <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center overflow-hidden">
+                  <svg className="h-8 w-8 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                  </svg>
+                </div>
+                <span className="ml-3 font-medium">sham sarkar</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <div className="w-8 h-8 rounded-full bg-white text-green-600 flex items-center justify-center font-bold">
+                  P
+                </div>
+                <button 
+                  onClick={toggleDarkMode}
+                  className="w-8 h-8 rounded-full bg-white flex items-center justify-center"
+                >
+                  <Moon className={`h-5 w-5 ${isDarkMode ? 'text-indigo-800' : 'text-gray-400'}`} />
+                </button>
+              </div>
+            </>
+          ) : (
+            <div className="w-10 h-10 rounded-full bg-white mx-auto flex items-center justify-center overflow-hidden">
+              <svg className="h-8 w-8 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+              </svg>
+            </div>
+          )}
+        </div>
+        
         <div className="p-4 border-b border-gray-700 flex items-center justify-between">
           {!isCollapsed && <h2 className="text-xl font-bold">VIBE CONNECT</h2>}
           <button onClick={() => setIsCollapsed(!isCollapsed)} className="p-1 rounded-full hover:bg-indigo-700">
@@ -133,4 +195,3 @@ export default function Sidebar() {
     </>
   )
 }
-
