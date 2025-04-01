@@ -40,13 +40,11 @@ Backend Setup
 Clone the Repository:
 
 git clone https://github.com/ABHIKALVIUM/supplier-management.git
-
 cd supplier-management/backend
 
 Create a Virtual Environment:
 
 python -m venv venv
-
 source venv/bin/activate  # On Windows use: venv\Scripts\activate
 
 Install Dependencies:
@@ -100,3 +98,5 @@ Backend: Flask, Python, MongoDB
 Authentication: JWT-based security
 
 API: RESTful API architecture
+
+Video Link: https://drive.google.com/file/d/1X8Uo7xJhoXxy_cmOYI0mC6ijihdBeoOX/view?usp=sharing
